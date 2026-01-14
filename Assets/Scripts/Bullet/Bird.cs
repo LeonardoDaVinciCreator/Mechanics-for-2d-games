@@ -12,6 +12,11 @@ public class Bird : MonoBehaviour, ILaunchable
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(velocity, ForceMode2D.Impulse);
     }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!collision.gameObject.CompareTag("Ground")) return;
+        gameObject.tag = "Untagged";
+    }
 
     public void Reset()
     {

@@ -31,17 +31,7 @@ public abstract class SlingshotControllerBase : MonoBehaviour
     private InputActionReference _pullPositionAction;    
 
     [Header("Visual"), Space(10)]    
-    [SerializeField] protected TrajectoryLineBase _visual;
-    /* [SerializeField]
-    protected Transform _centerSlingshot;
-    [SerializeField]
-    private int _pointsCount = 30;
-    [SerializeField] 
-    private LineRenderer _trajectoryLine;
-    [SerializeField, Space(2)] 
-    private LineRenderer _minCircle;
-    [SerializeField] 
-    private LineRenderer _maxCircle; */
+    [SerializeField] protected TrajectoryLineBase _visual;    
 
     protected bool _isPulling;
     protected float _distance;
@@ -72,12 +62,7 @@ public abstract class SlingshotControllerBase : MonoBehaviour
         _pullPositionAction.action.performed -= OnPull;
         _pullPositionAction.action.Disable();
     }
-
-    /* private void Start()
-    {
-        SetupCircle(_minCircle, _minDistance);
-        SetupCircle(_maxCircle, _maxDistance);
-    } */
+    
     protected void OnAttachStart(InputAction.CallbackContext context)
     {
         _isPulling = true;
@@ -114,35 +99,17 @@ public abstract class SlingshotControllerBase : MonoBehaviour
                 OnBirdLaunched?.Invoke(_targetObject.GetComponent<Bird>());
             }
             else
-            {
-                //ResetSlingshot();
+            {                
                 _launcher.Reset();
                 OnSlingshotReset?.Invoke();
             }
             _targetObject = null;
             _launcher = null;
         }
-        _visual?.ShowVisuals(false);
-        /* ShowVisuals(false); */
+        _visual?.ShowVisuals(false);        
         
         //смена объекта: пока просто спавн такого же объекта для рогатки
-    }
-
-    /* private void SetupCircle(LineRenderer line, float radius)
-    {
-        if (line == null) return;
-
-        line.positionCount = 32;//количество точек круга
-        line.useWorldSpace = true;
-        line.enabled = false;
-
-        for (int i = 0; i < 32; i++)
-        {
-            float angle = i * Mathf.PI * 2f / _pointsCount;
-            Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
-            line.SetPosition(i, _centerSlingshot.position + (Vector3)offset);
-        }
-    }         */
+    }    
 
     protected void OnPull(InputAction.CallbackContext context)
     {
@@ -181,78 +148,10 @@ public abstract class SlingshotControllerBase : MonoBehaviour
             _visual.MaxRadius = _maxDistance;
             _visual.ShowVisuals(true);
             _visual.UpdateAllVisuals();
-        }
-        /* ShowVisuals(true);
-        UpdateTrajectory();
-        UpdateCircles(); */
+        }        
     }
 
-    /* public void UpdateTrajectory()
-    {
-        if (_trajectoryLine == null || _targetObject == null) return;
-        _trajectoryLine.positionCount = _pointsCount;
-
-        //точка выстрела
-        
-        Vector2 slingshotPos = _targetObject.transform.position;//центр или же берется фиксированная позиция на рогатке
-        
-        Vector2 velocity = CalculateVelocity();
-
-        Vector2 currentPos = slingshotPos;
-        float timeStep = Time.fixedDeltaTime; // ~0.02f, идеально для предсказания
-        int maxIterations = 100; // Лимит, чтобы не лагало
-        Vector2 gravity = Physics2D.gravity;
-
-        _trajectoryLine.SetPosition(0, currentPos);
-
-        for (int i = 0; i < _pointsCount && i < maxIterations; i++)
-        {
-            _trajectoryLine.SetPosition(i, currentPos);
-
-            // Симуляция физики (гравитация)
-            
-            currentPos += velocity * timeStep;
-            velocity += gravity * timeStep;
-
-            // Проверка столкновений
-            if (currentPos.y < -10f || currentPos.magnitude > 20f)
-            {
-                // Дополняем оставшиеся точки
-                for (int j = i + 1; j < _pointsCount; j++)
-                {
-                    _trajectoryLine.SetPosition(j, currentPos);
-                }
-                break;
-            }
-        }
-    }
-
-    protected void UpdateCircles()
-    {
-        UpdateCirclePos(_minCircle, _minDistance);
-        UpdateCirclePos(_maxCircle, _maxDistance);
-    }
-
-    private void UpdateCirclePos(LineRenderer line, float radius)
-    {
-        if (line == null) return;
-        Vector2 center = _centerSlingshot.position;
-
-        for (int i = 0; i < line.positionCount; i++)
-        {
-            float angle = i * Mathf.PI * 2f / line.positionCount;
-            Vector2 point = center + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
-            line.SetPosition(i, point);
-        }
-    }
-
-    protected void ShowVisuals(bool show)
-    {
-        if (_trajectoryLine) _trajectoryLine.enabled = show;
-        if (_minCircle) _minCircle.enabled = show;
-        if (_maxCircle) _maxCircle.enabled = show;
-    }
- */
+    
     private bool IsTouchingBird(Vector2 screenPosition)
     {
         RaycastHit2D hit = GetRaycast(screenPosition);
