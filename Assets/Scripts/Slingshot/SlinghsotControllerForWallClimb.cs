@@ -16,7 +16,7 @@ public class SlinghsotControllerForWallClimb : SlingshotControllerBase
         _climbAnchor = _targetObject.transform.position;
         _centerSlingshot.position = _climbAnchor;
 
-        ShowVisuals(false);
+        /* ShowVisuals(false); */
     }
 
     protected override void PullTarget(Vector2 screenPosition)
@@ -34,9 +34,9 @@ public class SlinghsotControllerForWallClimb : SlingshotControllerBase
 
         _finalDistance = Mathf.Clamp(_distance, 0, _maxDistance);
 
-        ShowVisuals(true);
+        /* ShowVisuals(true);
         UpdateTrajectory();
-        UpdateCircles();
+        UpdateCircles(); */
     }
 
     protected override Vector2 CalculateVelocity()
