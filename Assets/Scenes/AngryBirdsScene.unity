@@ -2209,6 +2209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 671197997}
   - component: {fileID: 671197996}
+  - component: {fileID: 671197998}
   m_Layer: 0
   m_Name: Slingshot
   m_TagString: Untagged
@@ -2228,6 +2229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d772ddfb5132744b2dd175fb2035eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlingshotController
+  _centerSlingshot: {fileID: 1272134544}
   _minDistance: 2
   _maxDistance: 3
   _forceMultiplier: 5
@@ -2235,12 +2237,7 @@ MonoBehaviour:
   _maxAngle: 180
   _attachAction: {fileID: 1120369429361536294, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   _pullPositionAction: {fileID: -4084516794765417575, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  _slingshot: {fileID: 671197995}
-  _centerSlingshot: {fileID: 1272134544}
-  _pointsCount: 50
-  _trajectoryLine: {fileID: 166710966}
-  _minCircle: {fileID: 1949454484}
-  _maxCircle: {fileID: 958845035}
+  _visual: {fileID: 671197998}
 --- !u!4 &671197997
 Transform:
   m_ObjectHideFlags: 0
@@ -2260,6 +2257,29 @@ Transform:
   - {fileID: 375131237}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &671197998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671197995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc5e7cf2ea6c9ae41b3f93caee6b13ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VisualSlingshotBird
+  _centerSlingshot: {fileID: 1272134544}
+  _trajectoryLine: {fileID: 166710966}
+  _minCircle: {fileID: 1949454484}
+  _minRadius: 0.5
+  _maxCircle: {fileID: 958845035}
+  _maxRadius: 2
+  _pointsCount: 30
+  _minColor: {r: 0, g: 1, b: 0, a: 1}
+  _normalColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _maxColor: {r: 1, g: 0, b: 0, a: 1}
+  _birdTransform: {fileID: 2106181737}
 --- !u!1 &688677822
 GameObject:
   m_ObjectHideFlags: 0
@@ -5482,6 +5502,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &2106181737 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2091693770047439340, guid: 189e6bedeb022c6478056d137ade50f8, type: 3}
+  m_PrefabInstance: {fileID: 1851409483}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

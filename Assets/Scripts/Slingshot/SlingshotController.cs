@@ -5,8 +5,10 @@ public class SlingshotController : SlingshotControllerBase
 {
     protected override void AttachTarget()
     {
-        _targetObject.transform.position = _centerSlingshot.position;
-        ShowVisuals(false);
+       _targetObject.transform.position = _centerSlingshot.position;
+        //ShowVisuals(false);
+
+        _visual.ShowVisuals(true);
     }    
 
     private void LaunchBird(float angle, float distance)
@@ -37,7 +39,7 @@ public class SlingshotController : SlingshotControllerBase
         base.PullTarget(screenPos);
     }
 
-    protected override Vector2 CalculateVelocity()
+    public override Vector2 CalculateVelocity()
     {
         Vector2 direction = new Vector2(Mathf.Cos(_angle * Mathf.Deg2Rad), Mathf.Sin(_angle * Mathf.Deg2Rad));
         return direction * Mathf.Clamp(_finalDistance, _minDistance, _maxDistance) * _forceMultiplier;

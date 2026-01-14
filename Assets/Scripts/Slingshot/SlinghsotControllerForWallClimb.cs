@@ -36,7 +36,7 @@ public class SlinghsotControllerForWallClimb : SlingshotControllerBase
         UpdateCircles(); */
     }
 
-    protected override Vector2 CalculateVelocity()
+    public override Vector2 CalculateVelocity()
     {
         Vector2 direction = new Vector2(
             Mathf.Cos(_angle * Mathf.Deg2Rad),

@@ -8,6 +8,8 @@ public abstract class SlingshotControllerBase : MonoBehaviour
 
     [Header("Settings")]    
     [SerializeField]
+    protected Transform _centerSlingshot;
+    [SerializeField]
     protected float _minDistance;
     [SerializeField]
     protected float _maxDistance;
@@ -29,7 +31,8 @@ public abstract class SlingshotControllerBase : MonoBehaviour
     private InputActionReference _pullPositionAction;    
 
     [Header("Visual"), Space(10)]    
-    [SerializeField]
+    [SerializeField] protected TrajectoryLineBase _visual;
+    /* [SerializeField]
     protected Transform _centerSlingshot;
     [SerializeField]
     private int _pointsCount = 30;
@@ -38,7 +41,7 @@ public abstract class SlingshotControllerBase : MonoBehaviour
     [SerializeField, Space(2)] 
     private LineRenderer _minCircle;
     [SerializeField] 
-    private LineRenderer _maxCircle;
+    private LineRenderer _maxCircle; */
 
     protected bool _isPulling;
     protected float _distance;
@@ -70,11 +73,11 @@ public abstract class SlingshotControllerBase : MonoBehaviour
         _pullPositionAction.action.Disable();
     }
 
-    private void Start()
+    /* private void Start()
     {
         SetupCircle(_minCircle, _minDistance);
         SetupCircle(_maxCircle, _maxDistance);
-    }
+    } */
     protected void OnAttachStart(InputAction.CallbackContext context)
     {
         _isPulling = true;
@@ -119,12 +122,13 @@ public abstract class SlingshotControllerBase : MonoBehaviour
             _targetObject = null;
             _launcher = null;
         }
-        ShowVisuals(false);
+        _visual?.ShowVisuals(false);
+        /* ShowVisuals(false); */
         
         //смена объекта: пока просто спавн такого же объекта для рогатки
     }
 
-    private void SetupCircle(LineRenderer line, float radius)
+    /* private void SetupCircle(LineRenderer line, float radius)
     {
         if (line == null) return;
 
@@ -138,7 +142,7 @@ public abstract class SlingshotControllerBase : MonoBehaviour
             Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
             line.SetPosition(i, _centerSlingshot.position + (Vector3)offset);
         }
-    }        
+    }         */
 
     protected void OnPull(InputAction.CallbackContext context)
     {
@@ -170,12 +174,20 @@ public abstract class SlingshotControllerBase : MonoBehaviour
             Camera.main.transform.position.z));
         _targetObject.transform.position = worldPos;
 
-        ShowVisuals(true);
+        if(_visual != null)
+        {
+            _visual.SlingshotController = this;
+            _visual.MinRadius = _minDistance;
+            _visual.MaxRadius = _maxDistance;
+            _visual.ShowVisuals(true);
+            _visual.UpdateAllVisuals();
+        }
+        /* ShowVisuals(true);
         UpdateTrajectory();
-        UpdateCircles();
+        UpdateCircles(); */
     }
 
-    protected void UpdateTrajectory()
+    /* public void UpdateTrajectory()
     {
         if (_trajectoryLine == null || _targetObject == null) return;
         _trajectoryLine.positionCount = _pointsCount;
@@ -240,7 +252,7 @@ public abstract class SlingshotControllerBase : MonoBehaviour
         if (_minCircle) _minCircle.enabled = show;
         if (_maxCircle) _maxCircle.enabled = show;
     }
-
+ */
     private bool IsTouchingBird(Vector2 screenPosition)
     {
         RaycastHit2D hit = GetRaycast(screenPosition);
@@ -266,5 +278,5 @@ public abstract class SlingshotControllerBase : MonoBehaviour
     /// изменять силу, вектор, направление относительно необходимого результата
     /// </summary>
     /// <returns></returns>
-    protected abstract Vector2 CalculateVelocity();    
+    public abstract Vector2 CalculateVelocity();    
 }
