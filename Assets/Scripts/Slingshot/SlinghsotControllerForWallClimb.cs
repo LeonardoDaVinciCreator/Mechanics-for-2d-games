@@ -1,18 +1,15 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// теперь из-за того что не меняется _targetObject.transform.position не работает прыжок,
-/// /теперь нужно её менять не изменяя саму позицию
-/// </summary>
+/* 
+добавить визуал скалолоза обновленный
+ */
 
 public class SlinghsotControllerForWallClimb : SlingshotControllerBase
 {
     private Vector2 _climbAnchor;
 
     protected override void AttachTarget()
-    {
-        //_centerSlingshot.position = _targetObject.transform.position;//изменить
-
+    {        
         _climbAnchor = _targetObject.transform.position;
         _centerSlingshot.position = _climbAnchor;
 

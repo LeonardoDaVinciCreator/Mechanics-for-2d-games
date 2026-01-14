@@ -16,10 +16,7 @@ public class Climber : MonoBehaviour, ILaunchable
 
     public void Launch(Vector2 velocity)
     {
-        transform.parent = null;
-
-        /* _rb.simulated = false;
-        _rb.simulated = true; */
+        transform.parent = null;        
 
         _rb.isKinematic = false;
         _rb.linearVelocity = Vector2.zero;
@@ -39,14 +36,9 @@ public class Climber : MonoBehaviour, ILaunchable
 
     private void AttachWall(GameObject wall)
     {
-        /* var wallRb = wall.GetComponent<Rigidbody2D>();
-        if (wallRb == null) return; */
-
         _rb.linearVelocity = Vector2.zero;
         _rb.angularVelocity = 0;
         _rb.isKinematic = true;
-        //_rb.simulated = true;
-
 
         transform.parent = wall.transform;
 
@@ -57,10 +49,5 @@ public class Climber : MonoBehaviour, ILaunchable
     {
         _rb.isKinematic = false;
         transform.parent = null;
-
-       /*  _joint.enabled = false; */
-
-        // как пример
-        // если минимальное расстояние, то нужно вернуть на исходную позицию
     }
 }

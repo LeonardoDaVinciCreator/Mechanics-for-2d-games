@@ -10,8 +10,7 @@ public class SlingshotController : SlingshotControllerBase
     }    
 
     private void LaunchBird(float angle, float distance)
-    {
-        //????????
+    {        
         Rigidbody2D rb = _targetObject.GetComponent<Rigidbody2D>();
         rb.isKinematic = false;
         rb.linearVelocity = Vector2.zero;

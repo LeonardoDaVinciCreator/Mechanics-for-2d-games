@@ -95,9 +95,7 @@ public abstract class SlingshotControllerBase : MonoBehaviour
             {
                 AttachTarget();
             }
-        }
-        //проверка на нажатие на объект на рогатке: сама птица
-        //если птица => включение OnPull
+        }        
     }
 
     protected virtual void OnAttachEnd(InputAction.CallbackContext context)
@@ -107,8 +105,7 @@ public abstract class SlingshotControllerBase : MonoBehaviour
         {
             _finalDistance = Mathf.Clamp(_finalDistance, 0, _maxDistance);
             if (_finalDistance >= _minDistance)
-            {
-                //LaunchBird(_angle, _distance);
+            {                
                 Vector2 velocity = CalculateVelocity();
                 _launcher.Launch(velocity);
                 OnBirdLaunched?.Invoke(_targetObject.GetComponent<Bird>());
@@ -123,8 +120,8 @@ public abstract class SlingshotControllerBase : MonoBehaviour
             _launcher = null;
         }
         ShowVisuals(false);
-        //возврат в изначальное состояние если меньше минимальной дистанции сдвинулись
-        //смена объекта: пока просто спавн такого же объекта
+        
+        //смена объекта: пока просто спавн такого же объекта для рогатки
     }
 
     private void SetupCircle(LineRenderer line, float radius)
@@ -184,21 +181,15 @@ public abstract class SlingshotControllerBase : MonoBehaviour
         _trajectoryLine.positionCount = _pointsCount;
 
         //точка выстрела
-        //Vector2 startPos = _bird.transform.position;//сентер или же берется сама птица
+        
         Vector2 slingshotPos = _targetObject.transform.position;//центр или же берется фиксированная позиция на рогатке
-
-        float force = Mathf.Clamp(_distance, _minDistance, _maxDistance);
-        Vector2 pullDirection = (_centerSlingshot.position - _targetObject.transform.position).normalized;
-        //Vector2 velocity = pullDirection * Mathf.Clamp(_distance, _minDistance, _maxDistance) * _forceMultiplier;
-
+        
         Vector2 velocity = CalculateVelocity();
 
         Vector2 currentPos = slingshotPos;
         float timeStep = Time.fixedDeltaTime; // ~0.02f, идеально для предсказания
         int maxIterations = 100; // Лимит, чтобы не лагало
         Vector2 gravity = Physics2D.gravity;
-
-        int pointsDrawn = 0;
 
         _trajectoryLine.SetPosition(0, currentPos);
 
