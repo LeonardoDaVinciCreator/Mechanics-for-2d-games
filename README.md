@@ -2,6 +2,7 @@
 | # | English | Русский |
 |---|---------|---------|
 | 1 | [Slingshot Mechanics](#slingshot-mechanics-angry-birds-style) | [Механика рогатки](#механика-рогатки-стиль-angry-birds) |
+| 2 | [Wall Climber Mechanics](#wall-climber-mechanics) | [Механика Wall Climber](#механика-wall-climber) |
 
 ## Mechanics-for-2d-games
 ###  **Slingshot Mechanics** *(Angry Birds Style)*
@@ -13,6 +14,15 @@
 - Input System integration
 - Dynamic velocity calculation based on angle and distance
 
+###  **Wall Climber Mechanics**
+
+#### **Core Features**
+- Direct object throwing without slingshot mechanics
+- Wall attachment via physics joints after collision
+- No trajectory prediction (real-time object control)
+- Input System integration for throw and climb controls
+- Dynamic movement between multiple wall surfaces
+
 ## Механики для 2D игр
 ### **Механика рогатки** *(стиль Angry Birds)*
 
@@ -22,3 +32,12 @@
 - Отдельные контроллеры для разных типов объектов (Birds, Climbers)
 - Интеграция Input System
 - Динамический расчёт скорости по углу и дистанции
+
+### **Механика Wall Climber**
+
+#### **Основные возможности**
+- Прямой бросок объекта без рогатки
+- Прилипание к стене через физические соединения при столкновении
+- Отсутствие прогнозирования траектории (управление в реальном времени)
+- Интеграция Input System для броска и перемещения по стенам
+- Динамическое переключение между несколькими поверхностями стен
