@@ -11,7 +11,7 @@ using UnityEngine.InputSystem;
 /// 
 /// также нужен клик для остановки
 /// </summary>
-public class SwipeDetectorBase : MonoBehaviour
+public abstract class SwipeDetectorBase : MonoBehaviour
 {
     public static SwipeDetectorBase Instance
     {
@@ -84,26 +84,8 @@ public class SwipeDetectorBase : MonoBehaviour
         if(delta.magnitude > _swipeDistance)
         {
             Vector2 direction = delta.normalized;
-            float angle = Vector2.SignedAngle(Vector2.left, direction);  
-            
-            switch (angle)
-            {
-                case float n when (n >= -45f && n <= 45f):
-                    Debug.Log("направо");
-                    break;
-                case float n when (n > 45f && n <= 135f):
-                    Debug.Log("Вверх");
-                    break;
-                case float n when (n > 135f || n <= -135f):
-                    Debug.Log("налево");
-                    break;
-                default:
-                    Debug.Log("Вниз");
-                    break;
-            }
 
-
-            Debug.Log($"Направл: {direction}, Угол: {angle:F0}, ");
+            direction = FinalDirection(direction);
 
             OnSwipeDetected?.Invoke(direction);
         }
@@ -113,4 +95,7 @@ public class SwipeDetectorBase : MonoBehaviour
     {
         _currentPosition = position.ReadValue<Vector2>();
     }
+
+    protected abstract Vector2 FinalDirection(Vector2 direction);
+    
 }
