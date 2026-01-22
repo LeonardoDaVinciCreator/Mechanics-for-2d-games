@@ -4,6 +4,12 @@ using UnityEngine.InputSystem;
 
 /// <summary>
 /// Класс для определения обычного одинарного свайпа
+/// 
+/// 
+/// пк/геймпада только Vector2
+/// для определения свайпа для мышки/тачскрина Vector2 + button
+/// 
+/// также нужен клик для остановки
 /// </summary>
 public class SwipeDetectorBase : MonoBehaviour
 {
@@ -12,6 +18,8 @@ public class SwipeDetectorBase : MonoBehaviour
         get;
         private set;
     }
+
+    public static event Action<Vector2> OnSwipeDetected;
 
     [Header("Settings")]
     [SerializeField]
@@ -76,9 +84,28 @@ public class SwipeDetectorBase : MonoBehaviour
         if(delta.magnitude > _swipeDistance)
         {
             Vector2 direction = delta.normalized;
-            float angle = Vector2.SignedAngle(Vector2.left, direction);
+            float angle = Vector2.SignedAngle(Vector2.left, direction);  
+            
+            switch (angle)
+            {
+                case float n when (n >= -45f && n <= 45f):
+                    Debug.Log("направо");
+                    break;
+                case float n when (n > 45f && n <= 135f):
+                    Debug.Log("Вверх");
+                    break;
+                case float n when (n > 135f || n <= -135f):
+                    Debug.Log("налево");
+                    break;
+                default:
+                    Debug.Log("Вниз");
+                    break;
+            }
 
-            Debug.Log($"Направл: {direction}, Угол: {angle:F0}");
+
+            Debug.Log($"Направл: {direction}, Угол: {angle:F0}, ");
+
+            OnSwipeDetected?.Invoke(direction);
         }
     }
 

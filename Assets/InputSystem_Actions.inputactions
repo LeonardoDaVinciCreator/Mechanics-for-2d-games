@@ -777,7 +777,7 @@
             ]
         },
         {
-            "name": "Tap/Swipe",
+            "name": "Tap Swipe",
             "id": "88b4f3a0-7d57-4b8d-9927-137a8c6761fe",
             "actions": [
                 {
@@ -790,27 +790,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Swipe",
+                    "name": "Position",
                     "type": "Value",
                     "id": "123a010a-ed9c-46c4-ad4e-eba6cb1999d5",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "SwipeTouch",
-                    "type": "Value",
-                    "id": "93e47f1a-3095-4c62-8887-e6c22a36cadb",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "SwipeMouse",
-                    "type": "Value",
-                    "id": "00dd804c-41c6-4d48-af77-9b3ccf65fb3f",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -869,7 +851,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Swipe",
+                    "action": "Position",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -880,7 +862,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Swipe",
+                    "action": "Position",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -891,7 +873,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Swipe",
+                    "action": "Position",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -902,7 +884,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Swipe",
+                    "action": "Position",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -913,7 +895,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Swipe",
+                    "action": "Position",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -924,7 +906,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Swipe",
+                    "action": "Position",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -935,7 +917,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Swipe",
+                    "action": "Position",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -946,7 +928,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Swipe",
+                    "action": "Position",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -957,7 +939,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Swipe",
+                    "action": "Position",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -968,7 +950,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Swipe",
+                    "action": "Position",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -979,7 +961,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Swipe",
+                    "action": "Position",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -990,7 +972,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Swipe",
+                    "action": "Position",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1000,8 +982,8 @@
                     "path": "<Touchscreen>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "SwipeTouch",
+                    "groups": ";Touch",
+                    "action": "Position",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1011,8 +993,8 @@
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "SwipeMouse",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Position",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
