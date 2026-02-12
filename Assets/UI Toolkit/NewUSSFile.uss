@@ -1,0 +1,22 @@
+.menu-button {
+    width: 280px;
+    height: 160px;
+    background-color: #2c3e50;
+    border-radius: 10px;
+    color: white;
+    font-size: 42px;
+    margin: 30px;
+    padding: 10px;
+    /* Плавный переход для всех свойств */
+    transition: all 0.2s ease-in-out;  
+}
+
+.menu-button:hover {
+    background-color: rgb(52, 152, 219);
+    scale: 1.1;
+}
+
+.menu-button:active {
+    background-color: rgb(41, 128, 185);
+    scale: 0.95;
+}

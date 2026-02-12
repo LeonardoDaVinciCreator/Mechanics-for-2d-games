@@ -1,0 +1,14 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/NewUSSFile.uss?fileID=7433441132597879392&amp;guid=1c7e5ef89d6274a47837cbf801445907&amp;type=3#NewUSSFile"/>
+    <ui:VisualElement name="MainScreen" style="flex-grow: 1; width: 100%; height: 100%;">
+        <ui:Button text="Пауза" name="button" style="width: 200px; height: 150px; top: 36px; right: 24px; position: absolute; opacity: 1; display: flex; font-size: 42px; -unity-font-style: bold;"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="MenuPanel" style="flex-grow: 1; width: 70%; height: 70%; right: 0; top: 15%; left: 15%; bottom: 0; position: absolute; align-self: center; align-content: center; align-items: center; aspect-ratio: auto; background-color: rgba(0, 0, 0, 0.52); background-position-x: center; -unity-background-scale-mode: stretch-to-fill; -unity-slice-type: sliced; justify-content: center;">
+        <ui:Label text="Label" class="label"/>
+        <ui:VisualElement name="MenuCard" style="flex-grow: 1; visibility: visible; align-items: center; justify-content: center; align-self: center; align-content: center; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+            <ui:Button text="Button" class="menu-button"/>
+            <ui:Button text="Button" class="menu-button"/>
+            <ui:Button text="Button" class="menu-button"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
