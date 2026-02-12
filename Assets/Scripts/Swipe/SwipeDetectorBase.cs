@@ -20,6 +20,7 @@ public abstract class SwipeDetectorBase : MonoBehaviour
     }
 
     public static event Action<Vector2> OnSwipeDetected;
+    public static event Action OnClickDetected;
 
     [Header("Settings")]
     [SerializeField]
@@ -88,6 +89,10 @@ public abstract class SwipeDetectorBase : MonoBehaviour
             direction = FinalDirection(direction);
 
             OnSwipeDetected?.Invoke(direction);
+        }
+        else
+        {
+            OnClickDetected?.Invoke();
         }
     }
 

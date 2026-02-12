@@ -13,6 +13,7 @@ public class SwipeController : MonoBehaviour
     {        
         SwipeDetectorBase swipeDetectorBase = SwipeDetectorBase.Instance;
         SwipeDetectorBase.OnSwipeDetected += HandleSwipe;
+        SwipeDetectorBase.OnClickDetected += StopObject;
     }
 
     void OnDisable()
@@ -31,6 +32,11 @@ public class SwipeController : MonoBehaviour
        _rb.linearVelocity = direction * _speed; 
        if (_light != null)
             RotateLight(direction);
+    }
+
+    private void StopObject()
+    {
+        _rb.linearVelocity = Vector2.zero; // Остановка!
     }
 
     private void RotateLight(Vector2 direction)
