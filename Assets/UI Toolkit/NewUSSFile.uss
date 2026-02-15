@@ -1,22 +1,190 @@
-.menu-button {
-    width: 280px;
-    height: 160px;
-    background-color: #2c3e50;
-    border-radius: 10px;
-    color: white;
-    font-size: 42px;
-    margin: 30px;
-    padding: 10px;
-    /* Плавный переход для всех свойств */
-    transition: all 0.2s ease-in-out;  
+:root {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
-.menu-button:hover {
+/*******************окно игры*******************/
+
+.game-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.top-game-panel{
+    height: 200px;
+    flex-shrink: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    padding: 20px;
+}
+
+.top-button{
+    width: 200px;
+    height: 150px;
+
+    font-size: 42px;
+    -unity-font-style: bold;
+    background-color: #3498db;
+    border-radius: 12px;
+    color: white;
+
+    transition: all 0.2s ease;
+}
+
+.timer-label{
+    font-size: 72px;
+    -unity-font-style: bold;
+}
+
+.top-button:hover{
     background-color: rgb(52, 152, 219);
     scale: 1.1;
 }
 
+.top-button.hide{
+    opacity: 0;
+}
+
+/*******************окно меню*******************/
+
+.menu-panel{
+    position: absolute;
+    left: 5%;
+    top: 10%;
+
+    width: 90%;
+    height: 80%;
+
+    /*анимация*/
+    translate: 0 100%;
+    scale: 0.9;
+    opacity: 0;
+    transition: translate 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                scale 0.3s ease-out, 
+                opacity 0.3s ease-out;
+
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    background-color: rgba(44, 62, 80, 0.95);
+    border-radius: 16px;
+}
+
+.menu-panel.show {
+    translate: 0 0;
+    scale: 1.02;
+    opacity: 1;
+}
+
+.menu-label {
+    align-self: center;
+    order: 1;
+    margin: 0 0 40px 0;
+
+    font-size: 72px;
+    color: white;
+    -unity-font-style: bold;
+    margin-bottom: 30px;
+    opacity: 1;
+    translate: 0 20px;
+    transition: all 0.3s ease-out 0.1s;
+}
+
+.menu-panel.show .menu-label {
+    opacity: 1;
+    translate: 0 0;
+}
+
+.menu-card{
+    /*scale: 0.5;*/
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: auto;
+    order: 2;
+    padding: clamp(20px, 5vw, 40px);   
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.menu-button {
+    width: 800px;
+    height: 160px;
+    margin: 25px 0;
+    font-size: 56px;
+    color: white;
+    -unity-font-style: bold;
+    background-color: #2c3e50;
+    border-radius: 12px;
+    transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    /* Начальная анимация */
+    opacity: 1;
+    translate: 0 30px;  
+}
+
+.menu-panel.show .menu-button {
+    opacity: 1;
+    translate: 0 0;
+}
+
+.menu-button:hover {
+    background-color: #3498db;
+    scale: 1.08;
+    box-shadow: 0 10px 25px rgba(52, 152, 219, 0.4);
+}
+
 .menu-button:active {
-    background-color: rgb(41, 128, 185);
     scale: 0.95;
+    translate: 0 4px;
+    background-color: #2980b9;
+}
+
+/************СЛАЙДЕРЫ НАСТРОЕК********************/
+
+ .setting-row{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+
+ }
+
+ .setting-label {
+    font-size: 56px;
+    color: white;
+    flex: 1;
+}
+
+.setting-slider {
+    flex: 2;
+    height: 40px;
+    margin: 0 15px;
+}
+
+.setting-value {
+    font-size: 36px;
+    color: #3498db;
+    min-width: 60px;
+}
+
+.button-row{
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; 
+}
+
+.apply-btn, .cancel-btn{
+    width: 400px;
+    margin: 0 20px;
 }
