@@ -2,15 +2,15 @@
 
 public class Bird : MonoBehaviour, ILaunchable
 {
-    private Rigidbody2D rb;
+    private Rigidbody2D _rb;
 
-    private void Awake() => rb = GetComponent<Rigidbody2D>();
+    private void Awake() => _rb = GetComponent<Rigidbody2D>();
 
     public void Launch(Vector2 velocity)
     {
-        rb.isKinematic = false;
-        rb.linearVelocity = Vector2.zero;
-        rb.AddForce(velocity, ForceMode2D.Impulse);
+        _rb.bodyType = RigidbodyType2D.Dynamic;
+        _rb.linearVelocity = Vector2.zero;
+        _rb.AddForce(velocity, ForceMode2D.Impulse);
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -20,7 +20,7 @@ public class Bird : MonoBehaviour, ILaunchable
 
     public void Reset()
     {
-        rb.isKinematic = false;
+        _rb.bodyType = RigidbodyType2D.Dynamic;
         // Вернуть на исходную позицию или уничтожить
         //Destroy(gameObject);
     }

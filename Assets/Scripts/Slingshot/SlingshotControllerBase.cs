@@ -75,7 +75,7 @@ public abstract class SlingshotControllerBase : MonoBehaviour
             Rigidbody2D rb = _targetObject.GetComponent<Rigidbody2D>();
             if (rb != null && !_targetObject.TryGetComponent<Climber>(out _))
             {
-                rb.isKinematic = true;
+                rb.bodyType = RigidbodyType2D.Kinematic;
             }
 
             _launcher = _targetObject.GetComponent<ILaunchable>();

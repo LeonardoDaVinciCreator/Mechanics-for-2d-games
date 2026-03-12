@@ -18,7 +18,7 @@ public class Climber : MonoBehaviour, ILaunchable
     {
         transform.parent = null;        
 
-        _rb.isKinematic = false;
+        _rb.bodyType = RigidbodyType2D.Dynamic;
         _rb.linearVelocity = Vector2.zero;
         _rb.angularVelocity = 0f;        
         
@@ -31,14 +31,25 @@ public class Climber : MonoBehaviour, ILaunchable
     {
         if (!collision.gameObject.CompareTag("Wall")) return;
          
+        WallBase wall = collision.gameObject.GetComponent<WallBase>();
+        wall?.ActivateWall();
         AttachWall(collision.gameObject);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (!collision.gameObject.CompareTag("Wall")) return;
+        
+        // Деактивация при отрыве
+        WallBase wall = collision.gameObject.GetComponent<WallBase>();
+        wall?.DeactivateWall(); // Возврат в исходное положение
     }
 
     private void AttachWall(GameObject wall)
     {
         _rb.linearVelocity = Vector2.zero;
         _rb.angularVelocity = 0;
-        _rb.isKinematic = true;
+        _rb.bodyType = RigidbodyType2D.Kinematic;
 
         transform.parent = wall.transform;
 
@@ -47,7 +58,7 @@ public class Climber : MonoBehaviour, ILaunchable
 
     public void Reset()
     {
-        _rb.isKinematic = false;
+        _rb.bodyType = RigidbodyType2D.Dynamic;
         transform.parent = null;
     }
 }
