@@ -5,7 +5,6 @@ public class Climber : MonoBehaviour, ILaunchable
 {    
     private Rigidbody2D _rb;        
     private WallBase _attachedWall;
-    private bool _isAttached;
 
     private void Awake()
     {
@@ -64,8 +63,6 @@ public class Climber : MonoBehaviour, ILaunchable
 
     private void AttachWall(GameObject wall)
     {
-        _isAttached = true;
-
         _rb.linearVelocity = Vector2.zero;
         _rb.angularVelocity = 0;
         _rb.bodyType = RigidbodyType2D.Kinematic;
@@ -86,7 +83,6 @@ public class Climber : MonoBehaviour, ILaunchable
         _attachedWall.DeactivateWall(); // Возврат в исходное положение
         _attachedWall = null;
 
-        _isAttached = false;
         _rb.bodyType = RigidbodyType2D.Dynamic;
         transform.parent = null;
         gameObject.tag = "Untagged";
@@ -111,7 +107,6 @@ public class Climber : MonoBehaviour, ILaunchable
             _attachedWall = null;
         }
 
-        _isAttached = false;
         _rb.bodyType = RigidbodyType2D.Dynamic;
         transform.parent = null;
         gameObject.tag = "Untagged";
