@@ -25,6 +25,13 @@
 - Input System integration for throw and climb controls
 - Dynamic movement between multiple wall surfaces
 
+#### **Wall Type**
+- RegularWall - standard wall for climbing
+- MovingWall - moving platforms, climber moves with the wall
+- DisappearingWall - fade in/out walls (DOTween integration)
+- BouncingWall - bounce wall 
+- SlidingWall - planned feature for slippery surfaces
+
 ### **Swipe Detection System**
 
 #### **Core Features**
@@ -84,6 +91,15 @@ Button.clicked += handler for events
 - Интеграция Input System для броска и перемещения по стенам
 - Динамическое переключение между несколькими поверхностями стен
 
+#### **Типы стен**:
+- RegularWall - стандартная стена для лазания
+- MovingWall - движущиеся платформы, climber движется вместе со стеной
+- DisappearingWall - стены с эффектом появления/исчезновения через изменения прозрачности (интеграция DOTween)
+- BouncingWall - пока базово: реализация через Physic material 2d (пока отскок срабатывает назад на позицию, вместо отскока зеркально)
+- SlidingWall - пока не начата работа, скользкие поверхности(поднятие вверх и вниз)
+
+
+
 ### **Система определения свайпов**
 
 #### **Основные возможности**
@@ -121,4 +137,4 @@ List<Button> buttons = _panel.Query<Button>(className: "menu-button").ToList();
 - Label.text для изменения текста (аналогично TMPro)
 - Button.clicked += handler — события
 
-## Текущая версия юнити: 6000.3.7f1
+## Текущая версия юнити: 6000.3.10f1
