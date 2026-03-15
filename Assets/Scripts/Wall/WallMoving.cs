@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class WallMoving : WallBase
 {
-    [Header("Movement Limits")]
+    [Header("Movement Limits")]    
     [SerializeField]
-    private float _duration = 0.5f;
-    [SerializeField]
-    private float _distance = 1f;
+    private float _distance = 1f;    
 
     private Vector3 _originalPosition;
     private Tweener _moveTween;//анимация
+    [SerializeField]
+    private LoopType _type;
 
-    protected void Awake()
+    protected override void Awake()
     {
         base.Awake();
         _wallName = "WallMoving";
@@ -24,7 +24,7 @@ public class WallMoving : WallBase
         _originalPosition = transform.position;
     }
 
-    override public void ActivateWall()
+    public override void ActivateWall()
     {
         base.ActivateWall();
         _moveTween?.Kill();//уничтожение анимаций как для корутин
@@ -41,6 +41,6 @@ public class WallMoving : WallBase
     {
         Vector3 targetPos = _originalPosition + (Vector3)Vector2.up * _distance;
 
-        _moveTween = transform.DOMove(targetPos, _duration).SetLoops(-1, LoopType.Yoyo);
+        _moveTween = transform.DOMove(targetPos, _duration).SetLoops(-1, _type);
     }
 }

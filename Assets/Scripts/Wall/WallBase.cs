@@ -21,7 +21,8 @@ public class WallBase : MonoBehaviour
     [Header("Detection")]
     [SerializeField]
     protected float _radiusDetection;//радиус для колайдера обнаружения персонажа, если 0 => то не радиуса обнаружения, то есть проверка на спорикосновение к самой стене
-    protected float _timeSec, _speed;
+    [SerializeField]
+    protected float _duration;//можно использовать для усложнения уровня или для упрощения например ускорять или увеличивать
     private Collider2D _collider;
 
     public event Action OnWallActived;
@@ -47,13 +48,7 @@ public class WallBase : MonoBehaviour
         IsActive = false;
         Debug.Log($"{_wallType} Деактивация стены");
         OnWallDeactived?.Invoke();
-    }
-
-    /*public void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (!collision.gameObject.CompareTag("ActiveBird")) return;
-        gameObject.tag = "ActiveWall";
-    }*/
+    }    
 
     //типы:
     //подъём/спуск, 

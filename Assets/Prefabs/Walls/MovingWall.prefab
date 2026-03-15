@@ -154,3 +154,5 @@ MonoBehaviour:
   _wallName: WallMoving
   _wallType: 1
   _radiusDetection: 0
+  _duration: 0.5
+  _distance: 1
