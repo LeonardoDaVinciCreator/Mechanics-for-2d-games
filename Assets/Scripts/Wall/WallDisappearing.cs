@@ -1,4 +1,5 @@
 using DG.Tweening;
+using NUnit.Framework;
 using UnityEngine;
 
 public class WallDisappearing : WallBase
@@ -6,6 +7,7 @@ public class WallDisappearing : WallBase
 
     private Collider2D _wallCollider;
     private SpriteRenderer _spriteRenderer;
+    private Tweener _fadeTween;
 
     protected override void Awake()
     {
@@ -14,21 +16,28 @@ public class WallDisappearing : WallBase
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public override void ActivateWall()
+    override public void ActivateWall()
     {       
         base.ActivateWall();
-        gameObject.GetComponent<SpriteRenderer>().DOFade(0, _duration).OnComplete (
-            () =>
-            {                
-                _wallCollider.enabled = false;
-                DeactivateWall();
-            }
-        );;
-        /*transform.DOScale(Vector3.one * 0.5f, _duration).OnComplete(() =>
+
+        _fadeTween?.Kill();
+
+        _fadeTween = _spriteRenderer.DOFade(0, _duration).OnComplete(() =>
         {
+            _wallCollider.enabled = false;
             DeactivateWall();
-        });*/
+        });            
     }
 
-    
+    override public void DeactivateWall()
+    {
+        //возврат к изначальному свойству объекта
+        if(!IsActive) return;
+
+        _fadeTween?.Kill();
+        _spriteRenderer.DOFade(1, _duration).OnComplete(() =>
+        {
+            _wallCollider.enabled = true;           
+        });
+    }    
 }

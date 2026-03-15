@@ -4,6 +4,8 @@ using UnityEngine;
 public class Climber : MonoBehaviour, ILaunchable
 {    
     private Rigidbody2D _rb;        
+    private WallBase _attachedWall;
+    private bool _isAttached;
 
     private void Awake()
     {
@@ -32,6 +34,7 @@ public class Climber : MonoBehaviour, ILaunchable
         if (!collision.gameObject.CompareTag("Wall")) return;
          
         WallBase wall = collision.gameObject.GetComponent<WallBase>();
+        
         wall?.ActivateWall();
         AttachWall(collision.gameObject);
     }
@@ -50,6 +53,8 @@ public class Climber : MonoBehaviour, ILaunchable
         _rb.linearVelocity = Vector2.zero;
         _rb.angularVelocity = 0;
         _rb.bodyType = RigidbodyType2D.Kinematic;
+
+        _attachedWall = wall.GetComponent<WallBase>();
 
         transform.parent = wall.transform;
 
