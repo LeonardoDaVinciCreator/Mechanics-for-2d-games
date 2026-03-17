@@ -103,7 +103,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 8d2c6fbbc5dc34f47a7f91dfc757e39c, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -154,6 +154,4 @@ MonoBehaviour:
   _wallName: WallDisappearing
   _wallType: 3
   _radiusDetection: 0
-  _duration: 0.5
-  _distance: 1
   _duration: 0.5

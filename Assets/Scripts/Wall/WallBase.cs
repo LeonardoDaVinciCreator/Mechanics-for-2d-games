@@ -7,7 +7,8 @@ public enum WallType
     Regular, 
     Moving, 
     Sliding, 
-    Disappearing 
+    Disappearing,
+    Trampoline
 }
 
 public class WallBase : MonoBehaviour
@@ -27,6 +28,7 @@ public class WallBase : MonoBehaviour
 
     public event Action OnWallActived;
     public event Action OnWallDeactived;
+
     public bool IsActive{get; private set;}
 
     protected virtual void Awake()
@@ -54,7 +56,7 @@ public class WallBase : MonoBehaviour
     //подъём/спуск, 
     // уничтожающиеся, уничтожающиеся после прыжка с них, 
     // появляющиеся при приближении(доп колайдер больше чем сама стена) и исчезающая при выходе из поля
-    //с аниматором или движение через код
+    //с движение через код
     //уничтожающие персонажа
     //переворачивающие персонажа
 

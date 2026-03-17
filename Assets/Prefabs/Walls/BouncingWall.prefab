@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 4278789505852467314}
   - component: {fileID: 1564215534422867920}
   - component: {fileID: 53915511490289986}
-  - component: {fileID: -4150040365259416910}
   - component: {fileID: -5731864640268224419}
+  - component: {fileID: 4947991751408471253}
   m_Layer: 0
   m_Name: BouncingWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,22 +140,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-4150040365259416910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5687447302299452846}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4495d82e1e93e314a8493601c153cc0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WallBase
-  _wallName: Wall
-  _wallType: 0
-  _radiusDetection: 0
-  _duration: 0.5
 --- !u!50 &-5731864640268224419
 Rigidbody2D:
   serializedVersion: 5
@@ -172,7 +156,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: e92ed9c4f5b6142489bbd7cc04eb31eb, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -183,3 +167,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4947991751408471253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5687447302299452846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37128b058b5df36428ba6efa1073f173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WallTrampoline
+  _wallName: Wall
+  _wallType: 4
+  _radiusDetection: 0
+  _duration: 0.5
