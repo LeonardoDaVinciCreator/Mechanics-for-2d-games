@@ -1,15 +1,13 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements">
-    <Style src="project://database/Assets/UI%20Toolkit/NewUSSFile.uss?fileID=7433441132597879392&amp;guid=1c7e5ef89d6274a47837cbf801445907&amp;type=3#NewUSSFile"/>
-    
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainSyle.uss?fileID=7433441132597879392&amp;guid=1c7e5ef89d6274a47837cbf801445907&amp;type=3#MainSyle"/>
     <ui:VisualElement name="MainScreen" class="game-container">
-        <ui:VisualElement name="TopPanel" class="top-game-panel">"
+        <ui:VisualElement name="TopPanel" class="top-game-panel">
             <ui:Button text="Магазин" name="ShopButton" class="top-button"/>
             <ui:Label text="00:00" name="TimerLabel" class="timer-label"/>
             <ui:Button text="Пауза" name="PauseButton" class="top-button"/>
         </ui:VisualElement>
     </ui:VisualElement>
-    
-    <ui:VisualElement name="PauseMenu" class="menu-panel" >
+    <ui:VisualElement name="PauseMenu" class="menu-panel">
         <ui:Label text="Пауза" name="PauseLabel" class="menu-label"/>
         <ui:VisualElement name="PauseMenuCard" class="menu-card">
             <ui:Button text="Продолжить" name="ResumeButton" class="menu-button"/>
@@ -17,37 +15,28 @@
             <ui:Button text="Главное меню" name="MainMenuButton" class="menu-button"/>
         </ui:VisualElement>
     </ui:VisualElement>
-
     <ui:VisualElement name="SettingsMenu" class="menu-panel">
         <ui:Label text="Настройки" name="SettingsLabel" class="menu-label"/>
         <ui:VisualElement name="SettingsMenuCard" class="menu-card">
-            <!-- МУЗЫКА -->
             <ui:VisualElement class="setting-row">
                 <ui:Label text="🎵" class="setting-label"/>
-                <ui:Slider name="MusicSlider" class="setting-slider" low-value="0" high-value="100" value="70"/>
+                <ui:Slider name="MusicSlider" low-value="0" high-value="100" value="70" class="setting-slider"/>
                 <ui:Label name="MusicValue" text="70%" class="setting-value"/>
             </ui:VisualElement>
-            
-            <!-- ЗВУКИ -->
             <ui:VisualElement class="setting-row">
                 <ui:Label text="🔊" class="setting-label"/>
-                <ui:Slider name="SfxSlider" class="setting-slider" low-value="0" high-value="100" value="80"/>
+                <ui:Slider name="SfxSlider" low-value="0" high-value="100" value="80" class="setting-slider"/>
                 <ui:Label name="SfxValue" text="80%" class="setting-value"/>
             </ui:VisualElement>
-            
-            <!-- ВИБРАЦИЯ -->
             <ui:VisualElement class="setting-row">
                 <ui:Label text="📳" class="setting-label"/>
-                <ui:Slider name="VibrationSlider" class="setting-slider" low-value="0" high-value="100" value="90"/>
+                <ui:Slider name="VibrationSlider" low-value="0" high-value="100" value="90" class="setting-slider"/>
                 <ui:Label name="VibrationValue" text="90%" class="setting-value"/>
             </ui:VisualElement>
-            
-            <!-- КНОПКИ -->
             <ui:VisualElement class="button-row">
-                <ui:Button name="ApplyButton" class="menu-button apply-btn" text="✓"/>
-                <ui:Button name="CancelButton" class="menu-button cancel-btn" text="✗"/>
+                <ui:Button name="ApplyButton" text="✓" class="menu-button apply-btn"/>
+                <ui:Button name="CancelButton" text="✗" class="menu-button cancel-btn"/>
             </ui:VisualElement>
-        </ui:VisualElement> 
-    </ui:VisualElement>
-    
+        </ui:VisualElement>
+    </ui:VisualElement>    
 </ui:UXML>

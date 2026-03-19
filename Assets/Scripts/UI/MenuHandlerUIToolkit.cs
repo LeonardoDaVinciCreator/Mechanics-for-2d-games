@@ -13,6 +13,8 @@ public class MenuHandlerUIToolkit : MonoBehaviour
     private VisualElement _settingsMenu;
     private VisualElement _mainMenu;
 
+    private ScoreTimer _scoreTimer;
+
     private Action _pauseAction;
     private Action _settingsAction;
 
@@ -28,67 +30,99 @@ public class MenuHandlerUIToolkit : MonoBehaviour
     {
         _uiDoc = GetComponent<UIDocument>();
         _root = _uiDoc.rootVisualElement;
+        _scoreTimer = GetComponent<ScoreTimer>();
+
         _pauseAction = ToglePauseMenu;
         _settingsAction = TogleSettingsMenu;
 
+        InitializeUI();
+        SetupSliderCallbacks();
+        
+    }
+
+    private void InitializeUI()
+    {
         //поиск элемента по классу внутри VisualElement
-        _pauseMenu = _root.Q<VisualElement>("PauseMenu");//Q- первый элемент в последовательности
+        _pauseMenu = _root.Q<VisualElement>("PauseMenu");
         _settingsMenu = _root.Q<VisualElement>("SettingsMenu");
         _shopMenuButton = _root.Q<Button>("ShopButton");
-       
         _pauseMenuButton = _root.Q<Button>("PauseButton");
-        if(_pauseMenuButton == null || _pauseMenu == null) return;
+        
+        if (_pauseMenuButton == null || _pauseMenu == null) return;
         _pauseMenuButton.clicked += _pauseAction;
 
-        var pauseLabel = _pauseMenu.Q<Label>("PauseLabel");
-        var pauseMenuCard = _pauseMenu.Q<VisualElement>("PauseMenuCard");
-        List<Button> buttons = pauseMenuCard.Query<Button>(className: "menu-button").ToList();//Query-все элементы в последовательности     
+        SetupPauseMenuButtons();
+        SetupSettingsMenuButtons();
+    }
 
-        Label settingsLabel = _settingsMenu.Q<Label>("SettingsLabel");
-        if(_settingsMenu != null)
-        {
-            var settingsMenuCard = _settingsMenu.Q<VisualElement>("SettingsMenuCard");
-            if(settingsMenuCard != null)
-            {                
-                var applyBtn = settingsMenuCard.Q<Button>("ApplyButton");
-                var cancelBtn = settingsMenuCard.Q<Button>("CancelButton");
-                
-                applyBtn.clicked += _settingsAction;
-                cancelBtn.clicked += _settingsAction;
-            }
-        }
+    private void SetupPauseMenuButtons()
+    {
+         var pauseMenuCard = _pauseMenu.Q<VisualElement>("PauseMenuCard");
+        if (pauseMenuCard == null) return;
         
+        List<Button> buttons = pauseMenuCard.Query<Button>(className: "menu-button").ToList();
 
-
-        foreach(var btn in buttons)
+        foreach (var btn in buttons)
         {
             switch (btn.name)
             {
                 case "ResumeButton":
-                {
                     btn.clicked += _pauseAction;
                     break;
-                }
                 case "SettingsButton":
-                {
                     btn.clicked += _settingsAction;
                     break;
-                }
                 case "MainMenuButton":
-                {
                     btn.clicked += TogleMainMenu;
                     break;
-                }
-                
-            }            
+            }
         }
+    }
 
+    private void SetupSettingsMenuButtons()
+    {
+        if (_settingsMenu == null) return;
         
+        var settingsMenuCard = _settingsMenu.Q<VisualElement>("SettingsMenuCard");
+        if (settingsMenuCard == null) return;
+        
+        var applyBtn = settingsMenuCard.Q<Button>("ApplyButton");
+        var cancelBtn = settingsMenuCard.Q<Button>("CancelButton");
+        
+        if (applyBtn != null)
+            applyBtn.clicked += _settingsAction;
+            
+        if (cancelBtn != null)
+            cancelBtn.clicked += _settingsAction;
+    }
+
+    private void SetupSliderCallbacks()
+    {
+        if (_settingsMenu == null) return;
+        
+        SetupSlider("MusicSlider", "MusicValue");
+        SetupSlider("SfxSlider", "SfxValue");
+        SetupSlider("VibrationSlider", "VibrationValue");
+    }
+
+    private void SetupSlider(string sliderName, string valueLabelName)
+    {
+        var slider = _settingsMenu.Q<Slider>(sliderName);
+        var valueLabel = _settingsMenu.Q<Label>(valueLabelName);
+        
+        if (slider != null && valueLabel != null)
+        {
+            slider.RegisterValueChangedCallback(evt =>
+            {
+                valueLabel.text = $"{Mathf.RoundToInt(evt.newValue)}%";
+            });
+        }
     }
 
     private void TogleMainMenu()
     {
-        throw new NotImplementedException();
+        Debug.Log("Переход в главное меню");
+        Time.timeScale = 1;
     }
 
     private void TogleSettingsMenu()
@@ -104,6 +138,10 @@ public class MenuHandlerUIToolkit : MonoBehaviour
         {
             _settingsMenu.RemoveFromClassList("show");
             _pauseMenu.AddToClassList("show");
+
+            //возобновление таймера
+            if (_scoreTimer != null && _isPaused)
+                _scoreTimer.ResumeTimer();
         }
     }
 
@@ -125,23 +163,33 @@ public class MenuHandlerUIToolkit : MonoBehaviour
             _pauseMenuButton.AddToClassList("hide");
             _shopMenuButton.AddToClassList("hide");
             _shopMenuButton.SetEnabled(false);
+
+            if (_scoreTimer != null)
+                _scoreTimer.PauseTimer();
         }
         else
         {
             Time.timeScale = 1;
-            _pauseMenu.RemoveFromClassList("show");///удаление класса show в css
+            _pauseMenu.RemoveFromClassList("show");
             _pauseMenuButton.SetEnabled(true);
             _pauseMenuButton.RemoveFromClassList("hide");
             _shopMenuButton.RemoveFromClassList("hide");
             _shopMenuButton.SetEnabled(true);
+
+            if (_isSettings)
+            {
+                _isSettings = false;
+                _settingsMenu.RemoveFromClassList("show");
+            }
+            if (_scoreTimer != null)
+                _scoreTimer.ResumeTimer();
         }
     }
 
     private void OnDisable()
     {
         if(_pauseMenuButton == null) return;
-        _pauseMenuButton.clicked -= _pauseAction;
-        if(_pauseMenu == null || _settingsMenu == null) return;        
+            _pauseMenuButton.clicked -= _pauseAction;              
 
         CleanupMenuButtons();
     }
@@ -149,6 +197,7 @@ public class MenuHandlerUIToolkit : MonoBehaviour
     private void CleanupMenuButtons()
     {
         var allMenus = new[] { _pauseMenu, _settingsMenu };
+
         foreach(var menu in allMenus)
         {
             if(menu == null) continue;
