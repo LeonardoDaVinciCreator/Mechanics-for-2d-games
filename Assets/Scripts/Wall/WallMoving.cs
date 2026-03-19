@@ -15,7 +15,6 @@ public class WallMoving : WallBase
     protected override void Awake()
     {
         base.Awake();
-        _wallName = "WallMoving";
         _wallType = WallType.Moving;
     }
 
@@ -34,13 +33,13 @@ public class WallMoving : WallBase
     {
         base.DeactivateWall();
         _moveTween?.Kill();
-        transform.DOMove(_originalPosition, _duration);//возврат к изначальному положению
+        transform.DOMove(_originalPosition, 1);//возврат к изначальному положению
     }
 
     private void MoveWall()
     {
         Vector3 targetPos = _originalPosition + (Vector3)Vector2.up * _distance;
 
-        _moveTween = transform.DOMove(targetPos, _duration).SetLoops(-1, _type);
+        _moveTween = transform.DOMove(targetPos, 1/_speed).SetLoops(-1, _type);
     }
 }

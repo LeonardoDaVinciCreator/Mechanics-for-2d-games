@@ -3,8 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 
 public class WallDisappearing : WallBase
-{       
-
+{
     private Collider2D _wallCollider;
     private SpriteRenderer _spriteRenderer;
     private Tweener _fadeTween;
@@ -22,7 +21,7 @@ public class WallDisappearing : WallBase
 
         _fadeTween?.Kill();
 
-        _fadeTween = _spriteRenderer.DOFade(0, _duration).OnComplete(() =>
+        _fadeTween = _spriteRenderer.DOFade(0, 1/_speed).OnComplete(() =>
         {
             _wallCollider.enabled = false;
             DeactivateWall();
@@ -35,7 +34,7 @@ public class WallDisappearing : WallBase
         if(!IsActive) return;
 
         _fadeTween?.Kill();
-        _spriteRenderer.DOFade(1, _duration).OnComplete(() =>
+        _spriteRenderer.DOFade(1, 1/_speed).OnComplete(() =>
         {
             _wallCollider.enabled = true;           
         });

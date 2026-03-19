@@ -9,7 +9,6 @@ public class WallTrampoline : WallBase
     protected override void Awake()
     {
         base.Awake();
-        _wallName = "WallTrampoline";
         _wallType = WallType.Trampoline;
     }
 

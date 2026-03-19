@@ -13,17 +13,19 @@ public enum WallType
 
 public class WallBase : MonoBehaviour
 {
-    [Header("Wall Settings")]
-    [SerializeField]
-    protected string _wallName = "Wall";    
+    [Header("Wall Settings")]    
     [SerializeField]
     protected WallType _wallType = WallType.Regular;
     
     [Header("Detection")]
-    [SerializeField]
+    /*[SerializeField]
     protected float _radiusDetection;//радиус для колайдера обнаружения персонажа, если 0 => то не радиуса обнаружения, то есть проверка на спорикосновение к самой стене
+    */
     [SerializeField]
-    protected float _duration;//можно использовать для усложнения уровня или для упрощения например ускорять или увеличивать
+    protected float _speed;//можно использовать для усложнения уровня или для упрощения например ускорять или увеличивать
+    public float Speed => _speed;
+    
+    
     private Collider2D _collider;
 
     public event Action OnWallActived;

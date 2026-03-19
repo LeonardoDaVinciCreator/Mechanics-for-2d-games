@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class Climber : MonoBehaviour, ILaunchable
@@ -6,6 +7,8 @@ public class Climber : MonoBehaviour, ILaunchable
     private Rigidbody2D _rb;        
     private WallBase _attachedWall;
     private WallTrampoline _trampolineWall;
+
+    private Tweener _currentTween;
 
     private Vector2 _lastVelocityBeforeCollision;
 
@@ -20,6 +23,11 @@ public class Climber : MonoBehaviour, ILaunchable
 
     public void Launch(Vector2 velocity)
     {
+        if (_attachedWall != null)
+        {
+            DetachWall();
+        }
+
         transform.parent = null;        
 
         _rb.bodyType = RigidbodyType2D.Dynamic;
@@ -40,6 +48,8 @@ public class Climber : MonoBehaviour, ILaunchable
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Wall")) return;
+
+        if (_attachedWall != null) return;
 
         WallBase wall = collision.gameObject.GetComponent<WallBase>();
 
@@ -82,10 +92,11 @@ public class Climber : MonoBehaviour, ILaunchable
             return;
         }        
 
-        _trampolineWall = wall as WallTrampoline;
-        if(wall != null && _attachedWall == null)
+        
+        if(wall != null)
         {
             _attachedWall = wall;
+            _trampolineWall = wall as WallTrampoline;
 
             _attachedWall.OnWallActived += WallActived;
             _attachedWall.OnWallDeactived += WallDeactived;
@@ -97,6 +108,11 @@ public class Climber : MonoBehaviour, ILaunchable
             _attachedWall.ActivateWall();
             
             AttachWall(collision.gameObject);
+
+            if(wall is WallSliding)
+            {
+                AttachSlidingWall(wall);
+            }
         }
         
     }
@@ -123,27 +139,87 @@ public class Climber : MonoBehaviour, ILaunchable
 
         transform.parent = wall.transform;
 
-        gameObject.tag = "ActiveBird";
+        gameObject.tag = "ActiveBird";        
+    }
+
+    private void AttachSlidingWall(WallBase wall)
+    {
+        WallSliding wallSliding = (WallSliding)wall;
+        Vector2 position = transform.localPosition;
+        Vector2 size = wall.GetComponent<BoxCollider2D>().size;
+        float speed = wallSliding.Speed;
+        Vector2 pos = Vector2.zero;
+        switch (wallSliding.SlideDirection)
+        {
+            case SlidingWallDirection.Up:
+                pos = new Vector2(position.x, size.y/2);
+                break;
+            case SlidingWallDirection.Down:
+                pos = new Vector2(position.x, -size.y/2);
+                break;
+            case SlidingWallDirection.Left:
+                pos = new Vector2(-size.x/2, position.y);
+                break;
+            case SlidingWallDirection.Right:
+                pos = new Vector2(size.x/2, position.y);
+                break;            
+        }
+        SlideClimber(pos, speed);
+    }
+
+    private void SlideClimber(Vector2 direction, float speed)
+    {
+        if (_attachedWall == null) return;        
+        
+        _currentTween = transform.DOLocalMove(direction, 1/speed).OnComplete(
+            () =>
+            {
+                if (this != null && gameObject != null)
+                {
+                    DetachWall();
+                }
+            }
+        );
     }
 
     private void DetachWall()
-    {
-        _rb.bodyType = RigidbodyType2D.Dynamic;
+    {        
+        if (_attachedWall == null) return;
+
+        _currentTween?.Kill();
+        _currentTween = null;
+
+        WallBase wallToDetach = _attachedWall;
+        WallTrampoline trampolineToDetach = _trampolineWall;
+
+        Vector2 worldPosition = transform.position;
+        Quaternion worldRotation = transform.rotation;
+        
+        if (wallToDetach != null && wallToDetach.gameObject != null)
+        {            
+            wallToDetach.OnWallActived -= WallActived;
+            wallToDetach.OnWallDeactived -= WallDeactived;
+            
+            if (wallToDetach.gameObject.activeInHierarchy)
+            {
+                wallToDetach.DeactivateWall();
+            }
+        }
+
+        if (trampolineToDetach != null)
+        {
+            trampolineToDetach.OnRicochet -= WallRicochet;
+        }
+
         transform.parent = null;
-
-        _attachedWall.OnWallActived -= WallActived;
-        _attachedWall.OnWallDeactived -= WallDeactived;
-
-        if (_trampolineWall != null)
-            _trampolineWall.OnRicochet -= WallRicochet;
-
-        _attachedWall.DeactivateWall(); // Возврат в исходное положение
-        _attachedWall = null;
-
-        _rb.bodyType = RigidbodyType2D.Dynamic;
-        transform.parent = null;
+        transform.SetPositionAndRotation(worldPosition, worldRotation);
         gameObject.tag = "Untagged";
-    }    
+                
+        _rb.bodyType = RigidbodyType2D.Dynamic;
+
+        _attachedWall = null;
+        _trampolineWall = null;
+    }
 
     private void WallActived()
     {

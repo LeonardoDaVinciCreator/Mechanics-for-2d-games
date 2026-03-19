@@ -179,7 +179,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37128b058b5df36428ba6efa1073f173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WallTrampoline
-  _wallName: Wall
   _wallType: 4
-  _radiusDetection: 0
-  _duration: 0.5
+  _speed: 1

@@ -151,8 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 401ee0459a842a843b7d89bd0f2e4f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WallMoving
-  _wallName: WallMoving
   _wallType: 1
-  _radiusDetection: 0
-  _duration: 0.5
+  _speed: 2
   _distance: 1
+  _type: 1
