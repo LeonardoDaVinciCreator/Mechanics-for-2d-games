@@ -36,7 +36,8 @@ public class WallDisappearing : WallBase
         _fadeTween?.Kill();
         _spriteRenderer.DOFade(1, 1/_speed).OnComplete(() =>
         {
-            _wallCollider.enabled = true;           
+            _wallCollider.enabled = true;       
+
         });
     }    
 }
