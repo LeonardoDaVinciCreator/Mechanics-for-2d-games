@@ -20,15 +20,15 @@ public abstract class SlingshotControllerBase : MonoBehaviour
 
     [Space(2)]
     [SerializeField]
-    private float _minAngle;
+    protected float _minAngle;
     [SerializeField]
-    private float _maxAngle;    
+    protected float _maxAngle;    
 
     [Header("Actions"), Space(10)]
     [SerializeField]
-    private InputActionReference _attachAction;
+    protected InputActionReference _attachAction;
     [SerializeField]
-    private InputActionReference _pullPositionAction;    
+    protected InputActionReference _pullPositionAction;    
 
     [Header("Visual"), Space(10)]    
     [SerializeField] protected TrajectoryLineBase _visual;    
@@ -43,7 +43,7 @@ public abstract class SlingshotControllerBase : MonoBehaviour
     protected ILaunchable _launcher;
 
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         _attachAction.action.Enable();
         _attachAction.action.started += OnAttachStart;
@@ -53,7 +53,7 @@ public abstract class SlingshotControllerBase : MonoBehaviour
         _pullPositionAction.action.performed += OnPull;        
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         _attachAction.action.started -= OnAttachStart;
         _attachAction.action.canceled -= OnAttachEnd;
@@ -111,7 +111,7 @@ public abstract class SlingshotControllerBase : MonoBehaviour
         //смена объекта: пока просто спавн такого же объекта для рогатки
     }    
 
-    protected void OnPull(InputAction.CallbackContext context)
+    protected virtual void OnPull(InputAction.CallbackContext context)
     {
         if (_isPulling && _launcher != null)
         {
