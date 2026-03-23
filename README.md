@@ -26,11 +26,11 @@
 - Dynamic movement between multiple wall surfaces
 
 #### **Wall Type**
-- RegularWall - standard wall for climbing
+- RegularWall - standard wall for climbing wall
 - MovingWall - moving platforms, climber moves with the wall
 - DisappearingWall - fade in/out walls (DOTween integration)
-- BouncingWall - bounce wall 
-- SlidingWall - planned feature for slippery surfaces
+- BouncingWall - walls that cause the climber to bounce off, utilizing Vector2.Reflect to change direction, with an added upward force to lift the object
+- SlidingWall - a wall that moves the object via DOLocalMove, with selectable movement directions: Up, Down, Left, or Right.
 
 ### **Swipe Detection System**
 
@@ -95,8 +95,8 @@ Button.clicked += handler for events
 - RegularWall - стандартная стена для лазания
 - MovingWall - движущиеся платформы, climber движется вместе со стеной
 - DisappearingWall - стены с эффектом появления/исчезновения через изменения прозрачности (интеграция DOTween)
-- BouncingWall - пока базово: реализация через Physic material 2d (пока отскок срабатывает назад на позицию, вместо отскока зеркально)
-- SlidingWall - пока не начата работа, скользкие поверхности(поднятие вверх и вниз)
+- BouncingWall - стены с отскоком от стены, с использованием Vector2.Reflect для изменения направления и добавлением силы вверх для поднятия объекта
+- SlidingWall - стена, которая двигает объект через DOLocalMove с выбором направления для движения: Up, Down, Left, Right
 
 
 
