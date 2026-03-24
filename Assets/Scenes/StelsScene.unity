@@ -1354,6 +1354,10 @@ PrefabInstance:
       propertyPath: _radiusKiller
       value: 
       objectReference: {fileID: 1633194358}
+    - target: {fileID: 4016246248489648838, guid: d58f8bff38dbe094599d709ac660b9bc, type: 3}
+      propertyPath: _interactionAction
+      value: 
+      objectReference: {fileID: -9216608716798006613, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
     - target: {fileID: 4703318353310010315, guid: d58f8bff38dbe094599d709ac660b9bc, type: 3}
       propertyPath: m_Enabled
       value: 1

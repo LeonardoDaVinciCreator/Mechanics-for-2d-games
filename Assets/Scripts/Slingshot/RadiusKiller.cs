@@ -9,7 +9,7 @@ public class RadiusKiller : MonoBehaviour, IInteractable
 
     private RadiusVisual _radiusVisual;   
 
-    private void Awake()
+    private void Awake() 
     {
         _radiusVisual = GetComponent<RadiusVisual>();
     } 
@@ -20,7 +20,9 @@ public class RadiusKiller : MonoBehaviour, IInteractable
         {
             _isInteractable = true;
             _radiusVisual.VisualizeRadius(true);            
-            OnCanInteractChanged?.Invoke();            
+            OnCanInteractChanged?.Invoke();          
+
+            Debug.Log(_isInteractable);  
         }        
     }
 
@@ -30,7 +32,9 @@ public class RadiusKiller : MonoBehaviour, IInteractable
         {            
             _isInteractable = false;
             _radiusVisual.VisualizeRadius(false);
-            OnCanInteractChanged?.Invoke();            
+            OnCanInteractChanged?.Invoke();     
+
+            Debug.Log(_isInteractable);         
         }       
     }
 }
