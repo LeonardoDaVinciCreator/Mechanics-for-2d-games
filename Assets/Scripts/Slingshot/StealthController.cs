@@ -17,22 +17,30 @@ public class StealthController : SlingshotControllerBase
 
     override protected void OnEnable()
     {
-        base.OnEnable();
+        base.OnEnable(); 
 
         _interactionAction.action.Enable();
-        _interactionAction.action.performed += OnInteraction;
+        _interactionAction.action.started += OnInteraction;
+    }
+
+    private void Update(){
+        if(!_isInteracting) return;
+
+        Debug.Log("Interactable");
+        
     }
 
     override protected void OnDisable()
     {
         base.OnDisable();
 
-        _interactionAction.action.performed -= OnInteraction;
+        _interactionAction.action.started -= OnInteraction;
         _interactionAction.action.Disable();
     }      
 
     private void OnInteraction(InputAction.CallbackContext context)
     {
+        Debug.Log("OnInteraction called!");
         if(!_isInteracting) return;
 
         Debug.Log("Intraction");
