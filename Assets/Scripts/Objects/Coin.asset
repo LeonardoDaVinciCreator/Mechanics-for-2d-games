@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b255ffd9a549941b26e7ac18a01331, type: 3}
   m_Name: Coin
   m_EditorClassIdentifier: Assembly-CSharp::Object
+  _description: "\u041C\u043E\u0436\u043D\u043E \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C
+    \u0431\u043E\u043D\u0443\u0441"
+  _typeObject: 0
