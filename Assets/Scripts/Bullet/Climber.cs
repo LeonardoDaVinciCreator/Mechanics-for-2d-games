@@ -36,7 +36,7 @@ public class Climber : MonoBehaviour, ILaunchable
         
         _rb.AddForce(velocity, ForceMode2D.Impulse);
 
-        gameObject.tag = "Untagged";
+        gameObject.tag = "Player";
     }
 
     private void FixedUpdate()
@@ -213,7 +213,7 @@ public class Climber : MonoBehaviour, ILaunchable
 
         transform.parent = null;
         transform.SetPositionAndRotation(worldPosition, worldRotation);
-        gameObject.tag = "Untagged";
+        gameObject.tag = "Player";
                 
         _rb.bodyType = RigidbodyType2D.Dynamic;
 
@@ -247,7 +247,7 @@ public class Climber : MonoBehaviour, ILaunchable
 
         _rb.bodyType = RigidbodyType2D.Dynamic;
         transform.parent = null;
-        gameObject.tag = "Untagged";
+        gameObject.tag = "Player";
     }
 
     private void OnDestroy()

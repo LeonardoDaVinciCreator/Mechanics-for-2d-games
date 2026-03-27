@@ -26,7 +26,7 @@ public class Killer : MonoBehaviour, ILaunchable
         
         _rb.AddForce(velocity, ForceMode2D.Impulse);
 
-        gameObject.tag = "Untagged";
+        gameObject.tag = "Player";
     }
 
     public void Reset()

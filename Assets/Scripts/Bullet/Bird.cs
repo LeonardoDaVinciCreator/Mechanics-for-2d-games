@@ -15,7 +15,7 @@ public class Bird : MonoBehaviour, ILaunchable
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Ground")) return;
-        gameObject.tag = "Untagged";
+        gameObject.tag = "Player";
     }
 
     public void Reset()
